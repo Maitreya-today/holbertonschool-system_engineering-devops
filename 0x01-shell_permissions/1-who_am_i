@@ -1,2 +1,2 @@
 #!/bin/bash
-uid=$(id -u)
+id -un
