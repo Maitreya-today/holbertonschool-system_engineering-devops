@@ -1,2 +1,2 @@
 #!/bin/bash
-_betty id -u -n
+betty=$(id -u)
