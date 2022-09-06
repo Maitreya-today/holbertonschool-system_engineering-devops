@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod 701 hello
+chown 701 hello
