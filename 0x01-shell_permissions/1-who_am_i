@@ -1,2 +1,2 @@
 #!/bin/bash
-betty=$(id -u)
+uid=$(id -u)
