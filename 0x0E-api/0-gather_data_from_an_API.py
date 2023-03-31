@@ -1,43 +1,45 @@
 #!/usr/bin/python3
-"""
-This script uses a REST API to get information about an employee's
-TODO list progress given an employee ID.
-"""
+"""doc"""
 import requests
 import sys
+import urllib
 
 
-def main(employee_id):
-    url = "https://jsonplaceholder.typicode.com/"
-    user_url = f"{url}users/{employee_id}"
-    todo_url = f"{url}users/{employee_id}/todos"
+def get_employee_todo_progress(employee_id):
+    """doc"""
+    base_url = "https://jsonplaceholder.typicode.com"
 
-    user_response = requests.get(user_url)
-    todo_response = requests.get(todo_url)
+    user_response = requests.get("{}/users/{}"
+                                 .format(base_url, employee_id))
+    user_data = user_response.json()
 
-    if user_response.status_code != 200 or todo_response.status_code != 200:
-        print("Error: Unable to fetch data from the API")
+    if 'name' not in user_data:
+        print("Invalid employee ID")
         return
 
-    user_data = user_response.json()
-    todo_data = todo_response.json()
+    todos_response = requests.get("{}/users/{}/todos"
+                                  .format(base_url, employee_id))
+    todos_data = todos_response.json()
 
-    total_tasks = len(todo_data)
-    done_tasks = [task for task in todo_data if task["completed"]]
-    done_task_count = len(done_tasks)
+    done_tasks = [task for task in todos_data if task["completed"]]
+    total_tasks = len(todos_data)
 
-    print(f'Employee {user_data["name"]} is done with tasks({done_task_count}/{total_tasks}):')
+    print("Employee {} is done with tasks({}/{}): "
+          .format(user_data['name'], len(done_tasks), total_tasks))
+
     for task in done_tasks:
-        print(f'\t {task["title"]}')
+        print("\t", task["title"])
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: ./0-gather_data_from_an_API.py <employee_id>")
-    else:
-        try:
-            employee_id = int(sys.argv[1])
-            main(employee_id)
-        except ValueError:
-            print("Error: Employee ID must be an integer")
+    if len(sys.argv) != 2:
+        print("Usage: python3 0-gather_data_from_an_API.py <employee_id>")
+        sys.exit(1)
 
+    try:
+        employee_id = int(sys.argv[1])
+    except ValueError:
+        print("Employee ID must be an integer")
+        sys.exit(1)
+
+    get_employee_todo_progress(employee_id)
