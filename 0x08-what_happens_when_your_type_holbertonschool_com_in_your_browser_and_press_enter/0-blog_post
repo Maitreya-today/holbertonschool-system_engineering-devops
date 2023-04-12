@@ -1,0 +1,21 @@
+As a software engineer, it's important to have a solid understanding of the web stack and its components. One common interview question for software engineering positions is to explain what happens when you type a URL into your browser and press Enter.
+
+Here's a simplified breakdown of what occurs:
+
+DNS request: Your browser sends a request to a DNS server to resolve the URL into an IP address.
+
+TCP/IP: Once your browser has the IP address, it uses the TCP protocol to establish a connection with the server.
+
+Firewall: Incoming traffic is checked by a firewall to ensure it meets security requirements.
+
+HTTPS/SSL: Your browser performs a secure handshake with the server to establish an encrypted connection using HTTPS/SSL protocol.
+
+Load-balancer: If the website is hosted on multiple servers, a load balancer distributes incoming traffic across the available servers.
+
+Web server: Your request is forwarded to the web server that hosts the website.
+
+Application server: If the website runs any applications or has dynamic content, your request is forwarded to the application server.
+
+Database: If the website requires data from a database, the application server sends a request to the database server to retrieve the required data.
+
+In conclusion, understanding the web stack and its components is crucial for any software engineer. Being able to explain the steps involved in loading a website is an important skill that can help you stand out during interviews and grab the attention of potential employers.
